@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 1.基本绑定class -->
+        <h2 v-bind:class="classes">hello world</h2>
+        <!-- 2.动态class可以写对象语法 -->
+        <!-- <button v-bind:class="isActive ? 'active':'' " @click = "btnClick">我是按钮</button> -->
+
+        <!-- 对象语法的基本使用 -->
+        <button v-bind:class="{ active :isActive } " @click = "btnClick">我是按钮</button>
+
+
+    </div>
+
+    <script src="../lib/vue.js"></script>
+    <script>
+        //创建一个app
+        const app = Vue.createApp({
+            data: function () {
+                return {
+                classes:"abc cba nba",
+                isActive:false
+                }
+            },
+            methods:{
+                btnClick:function(){
+                    this.isActive =! this.isActive
+                }
+            }
+        })
+        //2.挂载app
+        app.mount("#app")
+    </script>
+</body>
+
+</html>

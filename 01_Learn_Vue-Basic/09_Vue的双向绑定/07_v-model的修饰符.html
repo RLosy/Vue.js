@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- lazy:绑定change事件 -->
+        <input type="text" v-model.lazy="message">
+        <h2>{{ message }}</h2>
+
+        <!-- 2.number:自动将内容转换成数字 -->
+        <input type="text" v-model.number="counter">
+        <h2>counter:{{counter}} -{{typeof counter}}</h2>
+
+        <input type="number" v-model.number="counter">
+        <h2>counter:{{counter}} -{{typeof counter}}</h2>
+        <!-- 3.trim:去除首尾的空格(中间的会改变) -->
+        <input type="text" v-model.trim="content">
+        <h2>content:{{content}}</h2>
+
+    </div>
+
+    <script src="../lib/vue.js"></script>
+    <script>
+        //创建一个app
+        const app = Vue.createApp({
+            data: function () {
+                return {
+                    message: "hello Vue",
+                    counter: 0,
+                    content:""
+                }
+            },
+            watch: {
+                content(newValue, oldValue){
+                    console.log("content:",newValue);
+                    
+                }
+            }
+        })
+        //2.挂载app
+        app.mount("#app")
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 可以使用template -->
+        <div v-for="(value,key,index ) in infos">
+            <span>{{value}}</span>
+            <strong>{{ key }}</strong>
+            <i>{{ index }}</i>
+        </div>
+    </div>
+    <script src="../lib/vue.js"></script>
+    <script>
+        //创建一个app
+        const app = Vue.createApp({
+            data: function () {
+                return {
+                    message: "hello Vue",
+                    infos: { name: "lyd", age: 18, height: 1.65 }
+                }
+            },
+        })
+        //2.挂载app
+        app.mount("#app")
+    </script>
+</body>
+
+</html>

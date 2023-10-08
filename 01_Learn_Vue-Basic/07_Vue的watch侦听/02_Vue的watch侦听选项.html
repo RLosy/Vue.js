@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h2>{{ info.name }}</h2>
+        <button @click="changeInfo">修改info</button>
+    </div>
+
+    <script src="../lib/vue.js"></script>
+    <script>
+        //创建一个app
+        const app = Vue.createApp({
+            data: function () {
+                return {
+                    info: [name = "lisa", age = 15, height = 1.65]
+                }
+            },
+            methods: {
+                changeInfo() {
+                    // this.info = { name: "rosy" }
+                    this.info.name = "jisoo"
+                }
+            },
+            watch: {
+                //默认watch监听不会进行深度监听
+                // info(newValue, oldValue) {
+                //     console.log('侦听到info:', newValue, oldValue);
+                // }
+                //进行深度监听
+                info: {
+                    handler(newValue, oldValue) {
+                        console.log('侦听到info改变:', newValue, oldValue)
+                        console.log(newValue === oldValue);
+
+                    },
+                    //监听器选项
+                    //info深度监听
+                    deep: true,
+                    //立即执行
+                    immediate: true
+                },
+                "info.name": function (newValue, oldValue) {
+                    console.log(newValue, oldValue);
+
+                }
+            }
+        })
+        //2.挂载app
+        app.mount("#app")
+    </script>
+</body>
+
+</html>

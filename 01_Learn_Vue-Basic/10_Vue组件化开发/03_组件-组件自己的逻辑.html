@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .product {
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <nav-item></nav-item>
+
+        <product-item></product-item>
+        <product-item></product-item>
+        <product-item></product-item>
+
+    </div>
+    <template id="product">
+        <div class="product">
+            <h2>商品信息</h2>
+            <p>商品描述,限时折扣</p>
+            <p>价格:9.9</p>
+        </div>
+    </template>
+
+    <template id="nav">
+        <div class="nav">
+            <h1>导航程序</h1>
+        </div>
+    </template>
+
+    <script src="../lib/vue.js"></script>
+    <script>
+        //创建一个app
+        const app = Vue.createApp({
+            data() {
+            }
+        })
+        //2.注册全局组件
+        app.component("product-item", {
+            template: "#product"
+        })
+        app.component("nav-item", {
+            template: "#nav"
+        })
+        //2.挂载app
+        app.mount("#app")
+    </script>
+</body>
+
+</html>

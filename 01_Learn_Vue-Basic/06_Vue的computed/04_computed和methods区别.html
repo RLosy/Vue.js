@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h2>{{ getFullname() }}</h2>
+        <h2>{{ getFullname() }}</h2>
+        <h2>{{ getFullname() }}</h2>
+
+
+        <h2>{{ fullname }}</h2>
+        <h2>{{ fullname }}</h2>
+        <h2>{{ fullname }}</h2>
+
+        <button @click="changeLastName">按钮</button>
+    </div>
+
+    <script src="../lib/vue.js"></script>
+    <script>
+        //创建一个app
+        const app = Vue.createApp({
+            data: function () {
+                return {
+                    //1.姓名
+                    firstName: "lyd",
+                    lastName: "Rosy",
+                }
+            },
+            methods: {
+                getFullname() {
+                    console.log('getFullname');
+                    return this.firstName + " " + this.lastName
+                },
+                changeLastName(){
+                  this.name = "lisa"
+
+                }
+
+            },
+            computed: {
+                fullname() {
+                    console.log('fullname');
+                    return this.firstName + " " + this.lastName
+                }
+            }
+        })
+        //2.挂载app
+        app.mount("#app")
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        th,
+        td {
+            border: 1px solid #aaa;
+            padding: 8px 16px,
+        }
+        th {
+            background-color: #f5f5f5;
+        }
+        .active{
+            background-color:skyblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <table>
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>书籍名称</th>
+                    <th>出版日期</th>
+                    <th>价格</th>
+                    <th>购买数量</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item,index) in books" :key="item.id"
+                @click = "rowClick(index)"
+                :class = "{ active:index === currentIndex }"
+                >
+                    <td>{{ index +1 }}</td>
+                    <td>{{ item.name}}</td>
+                    <td>{{ item.date }}</td>
+                    <td> {{formatPrice(item.price) }}</td>
+                    <td>
+                        <button :disabled="item.count <= 1" @click="decrement(index,item)">-</button>
+                        {{ item.count}}
+                        <button @click="increment(index,item)">+</button>
+                    </td>
+                    <td>
+                        <button @click="removeBook(index)">移除</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- <h2>总价：￥{{totalPrice }}</h2> -->
+        <h2>总价：{{ formatPrice(totalPrice)}} </h2>
+
+    </div><base href="">
+
+    <script src="../lib/vue.js"></script>
+    <script src="./data/data.js"></script>
+    <script>
+        //创建一个app
+        const app = Vue.createApp({
+            data: function () {
+                return {
+                    books: books,
+                    currentIndex:0,
+                }
+            },
+            computed: {
+                totalPrice() {
+                    //1.直接遍历books
+                    let price = 0
+                    for (const item of this.books) {
+                        price += item.price * item.count
+                    }
+                    return price
+                }
+            },
+            methods: {
+                formatPrice(price) {
+                    return "￥" + price
+                },
+                decrement(index, item) {
+                    // console.log('点击');
+
+                    item.count--
+                },
+                increment(index, item) {
+                    item.count++
+                },
+                removeBook(index, item) {
+                    this.books.splice(index, 1)
+                },
+                rowClick(index){
+                    this.currentIndex = index
+                }
+            },
+
+        })
+        //2.挂载app
+        app.mount("#app")
+    </script>
+</body>
+
+</html>
